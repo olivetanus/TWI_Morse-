@@ -16,15 +16,27 @@ The project lives in the Telegrafisti Web Italiani community and welcomes contri
 
 If you like the concept, please consider contributing or opening an issue with ideas and feedback.
 
+---
+
+## 🌍 Active Server
+
+A server is already online and reachable here:  
+👉 **https://telegrafistiwebitaliani.altervista.org/**  
+
+At the moment it works with the good old **CWCom** client, but the plan is to make TWI Morse fully compatible in the near future.
+
+
 
 ---
 
 ## What it does (in short)
 
-- Connects to **existing Morse-over-IP servers** (MorseKOB/CWCom-style).
-- Lets you **transmit and receive** in real time.
-- Offers a **radio-style UI** that’s friendly for newcomers.
-- Plays **realistic audio** and supports Morse code translation aids.
+- Connects to **existing Morse-over-IP servers** (MorseKOB/CWCom-style).  
+- Lets you **transmit and receive** in real time.  
+- Offers a **radio-style UI** that’s friendly for newcomers.  
+- Plays **realistic audio** and supports Morse code translation aids.  
+- Includes a **waterfall display** for signal visualization.  
+- Features a **real-time S-meter** to monitor signal strength.  
 
 ---
 
