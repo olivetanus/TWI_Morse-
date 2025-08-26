@@ -7,6 +7,15 @@ It’s inspired by tools like **MorseKOB** and **CWCom**, but with a clear goal:
 
 The project lives in the Telegrafisti Web Italiani community and welcomes contributions of any size: bug fixes, UX polish, docs, new features, you name it.
 
+## ⚠️ Current Status
+
+> **Important:** TWI Morse is not yet fully functional.  
+> Right now it represents a **basic working idea / prototype**.  
+> The goal is to provide a starting point and hopefully attract developers and enthusiasts who would like to help turn this into a complete and stable system.
+
+If you like the concept, please consider contributing or opening an issue with ideas and feedback.
+
+
 ---
 
 ## What it does (in short)
