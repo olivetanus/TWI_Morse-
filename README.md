@@ -8,6 +8,9 @@ It’s inspired by tools like **MorseKOB** and **CWCom**, but with a clear goal:
 
 The project lives in the Telegrafisti Web Italiani community and welcomes contributions of any size: bug fixes, UX polish, docs, new features, you name it.
 
+![TWI Morse Screenshot](/assets/demo/demo.JPG)
+
+
 ## ⚠️ Current Status
 
 > **Important:** TWI Morse is not yet fully functional.  
