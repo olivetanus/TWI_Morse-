@@ -29,83 +29,76 @@ A server is already online and reachable here:
 At the moment it works with the good old **CWCom** client, but the plan is to make TWI Morse fully compatible in the near future.
 
 
+Features (work in progress)
 
----
+SDR-like waterfall (no grid lines), with a bottom marker /-----| and a sliding channel scale (−5 … 0 … +5).
 
-## What it does (in short)
+S-meter needle with smoothing.
 
-- Connects to **existing Morse-over-IP servers** (MorseKOB/CWCom-style).  
-- Lets you **transmit and receive** in real time.  
-- Offers a **radio-style UI** that’s friendly for newcomers.  
-- Plays **realistic audio** and supports Morse code translation aids.  
-- Includes a **waterfall display** for signal visualization.  
-- Features a **real-time S-meter** to monitor signal strength.  
+CW audio sidetone (600 Hz) with soft attack/release.
 
----
+Adaptive decoder for dots/dashes and spacing (aims to follow both automatic feeds and human keying).
 
-## How it’s built (quick architecture)
+Channel activity view for ±5 wires around the center.
 
-- **Client-only** app: no bundled server, it **leans on public servers** already running.
-- **Python** for cross-platform simplicity.
-- **GUI** built with PyQt.
-- **Networking** via sockets to talk to standard MorseIP endpoints.
+Spacebar TX input (future: physical keyer via serial).
 
----
+Quick Start
+# Python 3.10–3.12 recommended
+pip install PyQt5 numpy sounddevice
 
-## Windows Install — Step by Step
-
-> TL;DR: install Python → clone repo → create venv → install deps → run.
-
-### 1) Install Python 3.10 or newer
-- Download from: https://www.python.org/downloads/
-- During setup on Windows, **check “Add Python to PATH.”**
-- Verify in PowerShell:
-  ```powershell
-  python --version
-  pip --version
-------------------------------
-
-If pip is missing, run:
-
-python -m ensurepip --upgrade
-
-2) Get the source
-
-Open PowerShell and run:
-
-git clone https://github.com/yourusername/twi-morse.git
-cd twi-morse
+# run
+python -m app.main_app
+# enter your callsign when prompted (e.g., IZ6198SWL)
+# default server field is prefilled: http://5.250.190.24
 
 
-No Git? Click “Code → Download ZIP” on GitHub and unzip, then cd into the folder.
+Tip: Place the UI images under assets/images/ (e.g., chassis.png, smeter_light.png, knob_*.png, btn_*.png, etc.).
 
-3) Create a virtual environment (recommended)
-python -m venv .venv
-.\.venv\Scripts\activate
+Project Layout (simplified)
+TWO_Morse/
+├─ app/
+│  ├─ main_app.py            # main window, UI wiring, timers
+│  ├─ ui_layout.py           # pixel-perfect layout over chassis.png
+│  └─ widgets/               # waterfall, marker bar, channel scale, S-meter, knobs/buttons
+├─ net/
+│  └─ cwcom_client.py        # UDP client (CWCom/MorseKOB-style callbacks)
+├─ cw/
+│  ├─ audio_engine.py        # clean CW sidetone (600 Hz)
+│  ├─ tx_input.py            # spacebar binding
+│  └─ sender_classifier.py   # simple AUTO/HUMAN + WPM estimate
+├─ app/decoder/
+│  └─ morse_decoder.py       # adaptive dot/space decoder
+└─ assets/
+   └─ images/                # UI PNGs
 
+Roadmap / Open Issues
 
-You should see (.venv) at the start of your prompt.
+Exact CWCom behavior: perfect “silence during spaces” & gating synced to packet timings.
 
-4) Install dependencies
-pip install -r requirements.txt
+Decoder robustness: better dot estimation; stable letter/word gap detection across human operators and automatic feeds.
 
+Side-channel activity: show ±5 wires activity only when real traffic is present (no false positives).
 
-If you hit audio-driver trouble on Windows, prefer sounddevice over pyaudio.
-(This repo’s default requirements.txt uses sounddevice for that reason.)
+Performance: smooth 30 fps waterfall and low-latency audio without stutter.
 
-5) First run
-python TWI_Morse.py
+Serial keyer: RS-232/USB paddle/straight key support.
 
+Quality-of-life: tone Hz slider, attack/release controls, better S-meter calibration.
 
-On first launch you’ll be asked (or can open Settings) to set:
+If any of these sound fun, jump in!
 
-Server host (e.g. a public MorseKOB/CWCom server)
+Contributing
 
-Port
+PRs, issues, and discussions are very welcome.
+Please:
 
-Channel/Line (make sure it matches the server, e.g. 133)
+keep changes modular (new files for new subsystems preferred),
 
-WPM / Tone / Audio device (optional, can adjust later)
+submit full file replacements when touching core modules (easier to review),
 
-Click Connect and you should start seeing/ hearing traffic.
-Transmit with the key/button, practice sending, and enjoy the waterfall of dits and dahs.
+include a short note on how you tested.
+
+License
+
+TBD (will be clarified as the project matures).
